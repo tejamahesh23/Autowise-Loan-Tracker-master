@@ -1,0 +1,266 @@
+/* all of this SHOULD be in styles.css ... but w/e */
+
+* {
+  box-sizing: border-box;
+}
+
+.heading-primary {
+  font-size: 1em;
+  padding: 2em;
+  padding: 8px 0;
+  margin: 0;
+}
+
+.accordion a,
+a:hover,
+a:focus {
+  text-decoration: none;
+}
+
+.accordion-list {
+  border: 1px solid #ddd;
+}
+
+.accordion dl:after,
+.accordion-list:after {
+  content: "";
+  display: block;
+  height: 1em;
+  width: 100%;
+  background-color: #2ba659;
+}
+
+.accordion dd,
+.accordion__panel {
+  background-color: #eee;
+  font-size: 1em;
+  line-height: 1.5em;
+}
+
+
+/*
+  ACCORDION TRANSITION
+*/
+
+
+/* Accordion styles */
+
+.tab {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.checkSelector {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+.inverse-tab {
+  color: #38cc70;
+  padding: 2em;
+  font-weight: 700;
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: 1fr 8fr 1fr;
+  align-items: center;
+  text-align: center;
+}
+
+
+.tab-header {
+  background-color: #38cc70;
+  font-weight: 700;
+  padding: 2em;
+  display: grid;
+  grid-template-columns: 1fr 8fr 1fr;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  -webkit-transition: background-color 0.5s ease-in-out;
+  transition: background-color 0.5s ease-in-out;
+  margin: 0;
+}
+
+.tab-header>label {
+  grid-column: 1
+}
+
+.tab-header>span {
+  grid-column: 2
+}
+
+
+.tab-header:hover {
+  background-color: #2ba659;
+}
+
+.tab .tab-content {
+  max-height: 0;
+  padding: 0;
+  opacity: 0;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  -webkit-transform: scale(0.8);
+  transform: scale(0.8);
+
+  -webkit-transition: all .5s;
+  -o-transition: all .5s;
+  transition: all .5s;
+}
+
+.accordion {
+  width: 100%;
+  position: relative;
+  background-color: #eee;
+}
+
+.container-accordion {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 2em 0 2em 0;
+  padding-top: 100px;
+}
+
+/* :checked */
+
+.checkSelector:checked~.tab-content {
+  max-height: 50em;
+  padding: 8px;
+  -webkit-transform: scale(1.0);
+  transform: scale(1.0);
+  opacity: 1.0;
+}
+
+
+/* Icon */
+
+.tab-header::after {
+  grid-column: 3;
+  content: "+";
+  font-size: 1.5em;
+  line-height: 0.5em;
+  float: right;
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  transition: -webkit-transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+}
+
+input[type=radio]+label::after {
+  content: "\25BC";
+}
+
+input[type=checkbox]:checked+label::after {
+  transform: rotate(225deg);
+}
+
+input[type=radio]:checked+label::after {
+  transform: rotateX(225deg);
+}
+
+/*END TRANSITION*/
+
+
+/*--------------------------------------------------------------------------------------------------------------------*\
+|* FAKE ACCORDION HEADING - Looks like an accordion, doesn't act like one
+\*--------------------------------------------------------------------------------------------------------------------*/
+
+.accordionFakeTitle {
+  background-color: #38cc70;
+  text-align: center;
+  font-weight: 700;
+  padding: 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  -webkit-transition: background-color 0.5s ease-in-out;
+  transition: background-color 0.5s ease-in-out;
+  color: #fff;
+  border-bottom: 1px solid #30bb64;
+}
+
+.accordionFakeTitle:after {
+  font-size: 1.5em;
+  line-height: 0.5em;
+  float: right;
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  transition: -webkit-transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+}
+
+.accordionFakeTitle:hover {
+  background-color: #2ba659;
+}
+
+h5.warranty-instruction {
+  padding-top: 1em;
+  color: #444444;
+}
+
+
+/*--------------------------------------------------------------------------------------------------------------------*\
+|* ACCORDION ITEM
+\*--------------------------------------------------------------------------------------------------------------------*/
+
+
+/* Loan progress row */
+
+.progress-row {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.progress {
+  height: 100%;
+  margin-bottom: 0;
+}
+
+.progress-row hr {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+
+/* Loan action buttons row */
+
+.actions-row {
+  text-align: center;
+  margin-bottom: 16px;
+  display: grid;
+  grid-column-gap: 5px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.actions-row.customer {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* Loan warranty row */
+
+.warranty-row {
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.warranty-row hr {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.warranty {
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  margin-bottom: 0;
+}
+
+/* Button bar for loan editing */

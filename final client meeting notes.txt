@@ -1,0 +1,9 @@
+Client Meeting Notes 11/29/17 - Final Checks/Changes
+> Registration needs to be fixed - takes back to login page when you try to register
+> Customers see anything that they have submitted just can't edit it (insurance, buyers order, warranty) 
+> button to let the customer see the inventory (hyperlink to current autowise website)
+> Plus button in the bottom right is fine we can leave it
+> Colors inside of the accordion are fine
+> Our judgement on the colors for the progress bar - we can have 4 or 7 or whatever
+> maybe make text slightly bigger so people with bad eyesight can see
+> Everything else is fine according to client

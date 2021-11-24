@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include partials/header.ejs %>
+</head>
+
+<body>
+  <!-- col-sm-offset-1 col-lg-offset-1 -->
+  <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1 col-lg-offset-1 col-lg-10 col-lg-offset-1 main" ng-app="SWEApp" ng-controller="CRUDController" ng-init="init()">
+    <% include partials/nav.ejs %>
+    <% include partials/admin-filters.ejs %>
+    
+    <!-- Start of accordion content -->
+    <div class="row">
+      <div class="col-md-12">
+        <div id="sb-search" class="sb-search">
+          <form>
+            <input class="sb-search-input" placeholder="Search anything inside loans" type="text" id="search"
+                   ng-model="query" >
+            <input class="sb-search-submit" type="submit">
+          </form>
+        </div>
+        <div class="container-accordion">
+          <div ng-show="loading" id="loading">
+            <img id="loader" ng-show="loading" src="<%- path -%>/resources/load.gif">
+            <div class="load-txt">Loading</div>
+          </div>
+          <div ng-hide="loading" class="accordion invisible {{visible}}">
+            <dl ng-show="filtered_loans.length > 0">
+              <div class="inverse-tab">
+                <!-- need this for grid's sake -->
+                <span> &nbsp; </span>
+                <!-- TODO LATEEEEER: -->
+                <!-- Implement a 'select all' here -->
+
+                <div class="loanHeader">
+                  <span> Customer Name </span>
+                  <span> Loan Status </span>
+                  <span class="hidden-in-mobile"> Loan ID # </span>
+                </div>
+                <span> Show Details </span>
+              </div> 
+              <!-- never finished this filter ~ too complicated -->
+              <!-- | date_filter:looking_for_dates:start:end:createdEh -->
+              <div ng-repeat="loan in filtered_loans = (loans 
+                | orderBy:'updated_at':reverse
+                | filter: query
+                | selected_filter:looking_for_selected:massLoans
+                | archived_filter:looking_for_archived:looking_for_selected
+                | important_filter:looking_for_important)"
+                >
+                <div class="tab accordionIn accordionOut">
+                  <input id="tab-{{loan._id}}" type="checkbox" name="tabs" class="checkSelector">
+
+                  <label for="tab-{{loan._id}}" class="tab-header">
+                    <label class="container-mass container">
+                      <input type="checkbox" id="{{loan._id}}-checkbox" ng-click="checkTrigger(loan._id)">
+                      <span class="checkmark"></span>
+                    </label>
+                    <div class="loanHeader">
+                      <span> {{loan.buyers_order.purchaser.name | limitTo: 18}} </span>
+                      <span> {{loan.status | uppercase}} </span>
+                      <span class="hidden-in-mobile"> #{{loan._id.toUpperCase() | limitTo:6:loan._id.length-6}} </span>
+                    </div>
+                  </label>
+
+                  <div class="tab-content">
+                    <% include partials/actions-row.ejs %>
+                    <% include partials/warranty-row.ejs %>
+                    <% include partials/accordion-comments.ejs %>
+                  </div>
+                </div>
+              </div>
+            </dl>
+            <h3 style="background: #f1f4f7;" 
+                ng-hide="filtered_loans.length > 0" class="centered-text">
+              No results. Either change the filters or log in again
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Hover Crud buttons -->
+    <% include partials/google_buttons.ejs %>
+    <!-- Loan CRUD Modals -->
+    <% include partials/modals.ejs %>
+    <% include partials/buyers-order.ejs %>
+  </div>
+  <% include partials/footer.ejs %>
+</body>
+
+</html>

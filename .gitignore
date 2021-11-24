@@ -1,0 +1,15 @@
+# Node build artifacts
+node_modules
+npm-debug.log
+
+# Local development
+.env*
+.sublime*
+swe-2017/*
+.DS_Store
+
+# Old config file
+server.db_config.js
+
+# THE gulp file
+gulpfile.js

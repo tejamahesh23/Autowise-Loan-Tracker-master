@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<% include partials/header.ejs %>
+</head>
+
+<body ng-app="SWEApp" ng-controller="LoginController" ng-init="init('<%- message -%>', '<%- type -%>')">
+<% include partials/nav.ejs %>
+
+<br>
+<br>
+
+<div class="row">
+  <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+    <div class="login-panel panel panel-default">
+      <div class="panel-body">
+        <div style="background: #f2f3f2;">
+          <ul class="nav nav-tabs login" id="tabContent">
+            <li class="active login"> <a href="#login" class="login" data-toggle="tab">Login</a> </li>
+            <li class="register"> <a href="#register" class="register" data-toggle="tab">Register</a> </li>
+          </ul>
+        </div>
+        <br>
+
+        <div class="tab-content" id="registration">
+          <div class="tab-pane active" id="login">
+            <form role="form" ng-submit="login()">
+              <fieldset>
+                <input ng-model="username" class="form-group form-control" placeholder="Username" required type="text">
+                <input ng-model="password" class="form-group form-control" placeholder="Password" required type="password">
+
+                <!-- TODO LATEEEERR -->
+                <!-- if someone wants to do the remember me... go ahead -->
+                <!-- Should be the same logic of the token, just EASIER -->
+                <p><a data-target="#forgot" data-toggle="modal" href="#"> Forgot username or password?</a></p>
+                <button class="btn btn-primary" type="submit"> Login </button>
+              </fieldset>
+            </form>
+          </div>
+
+          <div class="tab-pane" id="register">
+            <form role="form" ng-submit="register()">
+              <fieldset>
+                <input ng-model="newUser.email" placeholder="Email" class="form-group form-control" type="email">
+                <input ng-model="newUser.name" placeholder="Full legal name* (case sensitive)" required class="form-group form-control"  type="text">
+
+                <div class="form-group">
+                  <span style="color:red" ng-show="usernames[newUser.username]"> Username already taken </span>
+                  <input ng-model="newUser.username" placeholder="Username* (this could be your email)" required type="text"
+                         class="{{usernames[newUser.username] ? 'has-error' : ''}} form-control">
+                </div>
+
+                <input ng-model="newUser.password" placeholder="Password*" required class="form-group form-control"  type="password">
+
+                <div class="form-group">
+                  <span style="color:red" ng-show="(newUser.verify != newUser.password) && already_typed"> Passwords do not match </span>
+                  <input ng-model="newUser.verify" placeholder="Verify Password*" required type="password"
+                         class="{{(newUser.verify != newUser.password) && already_typed ? 'has-error' : ''}} form-control"  ng-blur="typedVerification()">
+                </div>
+
+                <input ng-model="newUser.dl"  placeholder="Driver's License #*" required class="form-group form-control" type="text">
+
+                <div class="form-group">
+                  <span style="color:red" ng-show="funny_dob"> {{funny_dob_message}} </span>
+                  <input ng-model="newUser.dob" placeholder="Date of Birth*" required type="date"
+                         class="{{funny_dob ? 'has-error' : ''}} form-control" ng-blur="checkDOB()">
+                </div>
+
+                <!-- just in case -->
+                <!-- 
+                <div class="form-group">
+                  <span>Admin?</span>
+                  <input ng-model="newUser.isAdmin" type="checkbox">
+                </div>
+
+                <div class="form-group">
+                  <span>Super Admin? (can delete loans and  everyone's comments)</span>
+                  <input ng-model="newUser.isSuperAdmin" type="checkbox">
+                </div>
+                 -->
+
+                <div class="left-text" id="required"></div>
+                <button class="btn btn-primary" type="submit"> Register </button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div ng-show="'<%- message -%>'" class="<%- type -%> centered-text" style="color: white;">
+      <%- message -%>
+    </div>
+
+
+    <!-- Forgot modal -->
+    <div class="">
+      <div class="col-xs-12">
+        <div class="modal fade" id="forgot" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header centered-text">
+                <button type="button" class="close" data-dismiss="modal">
+                  &times;
+                </button>
+                <h3>Forgot Password</h3>
+              </div>
+
+              <div class="modal-body" style="font-size: 15px">
+                <p style="padding: 5px">
+                  If you forgot your username or password, go ahead and create another account with the EXACT information.
+                  <br>
+                  <br>
+                  Otherwise if you'd like to use the same username, please check if it's already on file, and then contact us.
+                </p>
+
+                <div class="centered-text">
+                  Check if your username exist:
+                  <div>
+                    <input ng-model="forgotUsername" placeholder="Username" type="text"
+                           class="{{usernames[forgotUsername] ? 'has-error' : ''}} form-control">
+                    <span style="color:red" ng-show="usernames[forgotUsername]">
+                      <!-- mailto -->
+                      Username exist. Please contact us to have your account reinstated
+                      <br>
+                      Email: <a href="mailto:support@autowiseonline.com">support@autowiseonline.com</a> 
+                      <br>
+                      Phone: <a href="tel:8504455723">(850) 445-5723</a>
+                    </span>
+                    <span style="color:#38cc70" ng-show="forgotUsername && !usernames[forgotUsername]">
+                      Username doesn't exist. Go ahead and create a new account.
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<% include partials/footer.ejs %>
+<script type="text/javascript">
+  $("document").ready(function() {
+    // https://stackoverflow.com/questions/4565112/javascript-how-to-find-out-if-the-user-browser-is-chrome/13348618#13348618
+    var isChromium = window.chrome,
+        winNav = window.navigator,
+        vendorName = winNav.vendor,
+        isOpera = winNav.userAgent.indexOf("OPR") > -1,
+        isIEedge = winNav.userAgent.indexOf("Edge") > -1,
+        isIOSChrome = winNav.userAgent.match("CriOS");
+
+    var isChrome = (isChromium !== null &&
+    typeof isChromium !== "undefined" &&
+    vendorName === "Google Inc." &&
+    isOpera === false &&
+    isIEedge === false) ;
+
+    if (!(isIOSChrome || isChrome)) {
+      alert("Please open this website in Chrome for a better Browsing experience");
+    }
+  })
+
+</script>
+
+</body>
+</html>

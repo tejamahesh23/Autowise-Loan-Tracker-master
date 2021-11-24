@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include partials/header.ejs %>
+</head>
+<body>
+  <!-- ng-show="loans.length > 0" -->
+  <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1 col-lg-offset-1 col-lg-10 col-lg-offset-1 main" ng-app="SWEApp" ng-controller="CustomerController" ng-init="init()">
+    <% include partials/nav.ejs %>
+    
+    <div class=>
+      <div class="row title-container">
+        <h2> WELCOME TO <span class="title-brand">AUTOWISE</span> </h2>
+      </div>
+      <hr>
+      <div class="container-accordion" style="padding: 0px">
+        
+        <!-- Loading image -->
+        <div ng-show="loading" id="loading">
+          <img id="loader" ng-show="loading" src="<%- path -%>/resources/load.gif">
+          <div class="load-txt">Loading</div>
+        </div>
+        
+        <div ng-hide="loading" class="accordion invisible {{visible}}">
+          <div ng-repeat="loan in loans" ng-show="loans.length > 0">
+            <div class="tab-content">
+             <div class="row customer-row">
+                 <div class="col-sm-6 row-child">
+                     Your Loan ID
+                 </div>
+                 <div class="col-sm-6 right-right">
+                     #{{loan._id | uppercase | limitTo:6:loan._id.length-6}}
+                 </div>
+             </div>
+              
+              <% include partials/progress-row.ejs %>
+              <% include partials/actions-row-customer.ejs %>
+
+              <% include partials/warranty-row.ejs %>
+              <% include partials/accordion-comments.ejs %>
+            </div>
+          </div>
+
+          <h3 style="background: #f1f4f7;" ng-hide="loans.length > 0" class="centered-text">
+            You currently have no active loans
+          </h3>
+        </div>
+      </div>
+    </div>
+    <% include partials/buyers-order.ejs %>
+  </div>
+  <% include partials/footer.ejs %>
+  <style type="text/css">
+    .inputMODAL {
+      pointer-events:none;
+      background: #f2f3f2;
+    }
+  </style>
+</body>
+</html>

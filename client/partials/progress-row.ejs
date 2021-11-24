@@ -1,0 +1,10 @@
+<div class="row progress-row">
+  <div class="col-xs-12">
+    <span class="centered-text">Your Loan Status</span>
+    <div class="progress">
+      <div class="progress-bar active {{loan.status | lowercase}}-progress">
+        {{ loan.status | uppercase }}
+      </div>
+    </div>
+  </div>
+</div>

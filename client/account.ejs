@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include partials/header.ejs %>
+</head>
+<body>
+  <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1 col-lg-offset-1 col-lg-10 col-lg-offset-1 main" ng-app="SWEApp" ng-controller="UserAccounts" ng-init="init()">
+    <% include partials/nav.ejs %>
+
+    <br>
+    
+    <div class="col-md-12 account-info-style">
+      <h1 class="page-header user-info-title">Account Information</h1>
+    </div>
+
+    <div class="invisible {{visible}}">
+      <!-- The way this breaks is ugly... -->
+      <div class="row user-info-row">
+        <div class="col-md-6 col-beg">
+          &nbsp;
+        </div>
+      </div>
+
+      <!-- USERNAME -->
+      <div class="row user-info-row">
+        <div class="col-md-6 col-beg">
+          <h3>Username</h3>
+        </div>
+        <div class="col-md-6">
+          <div class="user-info-spacing"> {{user.username}} </div>
+        </div>
+      </div>
+
+      <!-- NAME -->
+      <div class="row user-info-row">
+        <div class="col-md-6 col-beg">
+          <h3>Name</h3>
+        </div>
+        <div class="col-md-6">
+          {{user.name}}
+        </div>
+      </div>
+
+      <!-- DOB -->
+      <div class="row user-info-row">
+        <div class="col-md-6 col-beg">
+          <h3>Date of Birth</h3>
+        </div>
+        <div class="col-md-6">
+          {{user.dob}}
+        </div>
+      </div>
+
+      <!-- EMAIL -->
+      <div class="row user-info-row">
+        <div class="col-md-6 col-beg">
+          <h3>Email</h3>
+        </div>
+        <div class="col-md-6">
+          {{user.email}}
+        </div>
+      </div>
+
+      <!-- DL -->
+      <div class="row user-info-row">
+        <div class="col-md-6 col-beg">
+          <h3>Driver's License</h3>
+        </div>
+        <div class="col-md-6">
+          <span> {{user.dl}} </span>
+        </div>
+      </div>
+
+
+      <!-- Forgot password area -->
+      <!-- 
+      <div class="row user-info-row user-info-btn">
+        <button class="btn btn-danger" data-dismiss="modal" data-target="#changePasswordModal" data-toggle="modal">
+          Change Password
+        </button>
+       -->
+      </div>
+    </div>
+    
+    <% include partials/modals.ejs %>
+    <% include partials/footer.ejs %>
+  </div>
+  <style type="text/css">
+    h3 {
+      zoom: 85%;
+    }
+  </style>
+</body>
+</html>

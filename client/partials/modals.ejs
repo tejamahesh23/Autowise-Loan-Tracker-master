@@ -1,0 +1,513 @@
+<!-- Change Password modal -->
+<!-- never implemented -->
+<div class="row">
+  <div class="col-xs-12">
+    <div class="modal fade" id="changePasswordModal" tabindex="-1">
+      <div class="modal-dialog" style="width: 60%; min-width: 615px;">
+        <div class="modal-content">
+          <div class="modal-header centered-text">
+            <button type="button" class="close" ng-click="resetForm()" data-dismiss="modal">&times;</button>
+            <h3>Change your password</h3>
+          </div>
+          <div class="modal-body">
+            <div class="tab-content">
+              <form name="resetme" id="resetme"> 
+              <div class="form-group">
+                  <label for="pwd">Current Password:</label>
+                  <input type="password" required="required" class="form-control" id="pwd" ng-model='pwd'>
+              </div>
+              <div class="form-group">
+                  <label for="pwd">New Password:</label>
+                  <input type="password" class="form-control" id="pw1" ng-model='pw1' ng-required pw-check='pwd'>
+              </div>
+              <div class="form-group">
+                  <label for="pwd">Confirm New Password:</label>
+                  <input type="password" class="form-control" id="pw2"  ng-model='pw2' ng-required pw-check='pw1'>
+              </div>
+              </form>
+              <div class="modal-footer">
+                  <button class="btn btn-primary" ng-click="changePasswordSubmit(pwd, pw1, pw2)">Submit</button>
+                  <button class="btn btn-default" ng-click="resetForm()" data-dismiss="modal">Cancel</button>
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- en masse Change status modal -->
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="modal fade" id="changeModalEnMasse" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header centered-text">
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+              <span>
+                <h3>Change the selected loans' status to</h3>
+                <!-- <br> -->
+                <select name="Loan Status" id="status-dropdown-enMasse" ng-model="newStatusMass">
+                    <!-- <option disabled selected>New Status</option> -->
+                    <option value="RECEIVED">Received</option>
+                    <option value="SUBMITTED">Submitted</option>
+                    <option value="PENDING">Pending</option>
+                    <option value="VERIFIED">Verified</option>
+                    <option value="APPROVED">Approved</option>
+                    <option value="DENIED">Denied</option>
+                </select>
+              </span>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" data-dismiss="modal" id="update-status-enMasse" ng-click="updateStatusEnMass(newStatusMass)">Update</button>
+              <button class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Single Change status modal -->
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="modal fade" id="changeModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header centered-text">
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+              <span>
+                <h3>
+                  Change 
+                  <br>
+                  <i>{{currLoan.buyers_order.purchaser.name}}'s</i> 
+                  <br>
+                  loan status to:
+                </h3>
+                <select name="Loan Status" id="status-dropdown" ng-model="newStatus">
+                    <!-- <option disabled selected>New Status</option> -->
+                    <option value="RECEIVED">Received</option>
+                    <option value="SUBMITTED">Submitted</option>
+                    <option value="PENDING">Pending</option>
+                    <option value="VERIFIED">Verified</option>
+                    <option value="APPROVED">Approved</option>
+                    <option value="DENIED">Denied</option>
+                    <option value="ARCHIVED">Archived</option>
+                </select>
+              </span>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" data-dismiss="modal" id="update-status" ng-click="changeLoanStatus(currLoan._id, newStatus)">Update</button>
+              <button class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Warranties info: Any Year -->
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="modal fade" id="Any-Year" tabindex="-1">
+        <div class="modal-dialog" style="width: 60%; min-width: 700px;">
+          <div class="modal-content">
+            <div class="modal-header centered-text">
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+              <h3> <b> <u> Drivetrain "Plus" Coverage </u> </b> </h3>
+              <br>
+              <div class="warrantyDescription">
+                <h4> <b> ENGINE </b>  </h4> Engine parts consisting of: Crankshaft and bearings, oil pump pickup/screen and tube, piston rings, wrist pins, connecting rods and rod bearings, timing gears and chain or belt, timing tensioners/guides, balance shafts, camshaft and camshaft bearings, push rods, rocker arms, rocker arm shaft and hydaulic lifters, intake and exhaust valves, valve springs, cylinder head gaskets. Engine blocks are also covered if mechanical failure was caused by the above-listed parts.
+                <br />
+                <br />
+                <h4> <b> AUTOMATIC TRANSMISSION </b> </h4> Gears, inputs and output shafts, bearings, front pump, planetary assembly, sprags, governor assembly, valve body, torque converter, transmission case, overdrive carrier, reaction carrier, center support, parking lock actuator, stator and stator shaft, separator plate, pressure regulator valve, dipstick and filler tube.
+                <br />
+                <br />
+                <h4> <b> STANDARD TRANSMISSION </b> </h4> Transmission parts consisting of: Gears, input and output shaft, bearings, overdrive housing and transmission case if malfunction was caused by the listed parts.
+                <br />
+                <br />
+                <h4> <b> DRIVE AXLE ASSEMBLY (FRONT OF REAR WHEEL DRIVE) </b> </h4> Consisting of: Drive shaft, ring and pinion gears, pinion gears, pinion bearings, side carrier bearings, carrier assembly, thrust washers, axle, axle bearings, and limited slip clutch park assembly. Universal and CV joints.
+                <br />
+                <br />
+                <h4> <b> DRIVE AXLE ASSEMBLY (4 WHEEL AND ALL-WHEEL DRIVE) </b> </h4> Transfer case including gears, main shaft, drive chain, thrust washer and shims, bearings. Front drive shaft, differential, axles, u-joints and CV joints.
+                <br />
+                <br />
+                <h4> <b> SEALS AND GASKETS </b> </h4> Cylinder head gaskets, all other seals and gaskets are covered in conjunction with repair of above-listed components
+                <br />
+                <br />
+                <h4> <b> COOLING </b> </h4> Water pump (limited to one-half parts and labor costs).
+                <br />
+                <br />
+                <h4> <b> ELECTRICAL </b> </h4> Alternator, starter and voltage regulator (limited to one-half of parts and labor costs)
+                <br />
+                <br />
+                <h4> <b> 24-HOUR ROADSIDE ASSISTANCE </b> </h4> Towing, flat tire changing, fuel delivery, lock-out service, jump starting, and Safe and Secure Package.
+                <br />
+                <br />
+                <h4> <b> RENTAL CAR ALLOWANCE </b> </h4> Provided on all plans to get you back on the road quickly.
+                <br />
+                <br />
+              </div>
+            </div>
+            <br>
+            <div class="modal-footer">
+              <button class="btn btn-default" data-dismiss="modal">Close</button>
+              <button class="btn btn-primary " data-dismiss="modal" ng-click="emailWarrantyInterest()">
+                <!-- Confirm this Plan -->
+                I want this plan
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Warranties info: 2007 or Newer -->
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="modal fade" id="Deluxe" tabindex="-1">
+        <div class="modal-dialog" style="width: 60%; min-width: 700px;">
+          <div class="modal-content">
+            <div class="modal-header centered-text">
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+              <h3> <b> <u> Deluxe Coverage </u> </b> </h3>
+              <br>
+              <div class="warrantyDescription">
+                <h4> <b> ENGINE </b>  </h4> Engine parts consisting of: Crankshaft and bearings, oil pump pickup/screen and tube, piston rings, wrist pins, connecting rods and rod bearings, timing gears and chain or belt, timing tensioners/guides, balance shafts, camshaft and camshaft bearings, push rods, rocker arms, rocker arm shaft and hydaulic lifters, intake and exhaust valves, valve springs, cylinder head gaskets. Engine blocks are also covered if mechanical failure was caused by the above-listed parts.
+                <br />
+                <br />
+                <h4> <b> AUTOMATIC TRANSMISSION </b> </h4> Gears, inputs and output shafts, bearings, front pump, planetary assembly, sprags, governor assembly, valve body, torque converter, transmission case, overdrive carrier, reaction carrier, center support, parking lock actuator, stator and stator shaft, separator plate, pressure regulator valve, dipstick and filler tube.
+                <br />
+                <br />
+                <h4> <b> STANDARD TRANSMISSION </b> </h4> Transmission parts consisting of: Gears, input and output shaft, bearings, overdrive housing and transmission case if malfunction was caused by the listed parts.
+                <br />
+                <br />
+                <h4> <b> DRIVE AXLE ASSEMBLY (FRONT OF REAR WHEEL DRIVE) </b> </h4> Consisting of: Drive shaft, ring and pinion gears, pinion gears, pinion bearings, side carrier bearings, carrier assembly, thrust washers, axle, axle bearings, and limited slip clutch park assembly. Universal and CV joints.
+                <br />
+                <br />
+                <h4> <b> DRIVE AXLE ASSEMBLY (4 WHEEL AND ALL-WHEEL DRIVE) </b> </h4> Transfer case including gears, main shaft, drive chain, thrust washer and shims, bearings. Front drive shaft, differential, axles, u-joints and CV joints.
+                <br />
+                <br />
+                <h4> <b> FRONT SUSPENSION </b> </h4> Upper and lower control arms, upper and lower ball joints, steering knuckle, wheel bearings, control arm shaft and bushings.
+                <br />
+                <br />
+                <h4> <b> STEERING </b> </h4> Power steering pump, electronic steering motor, steering gear housing and its internal parts and rack and pinion assembly.
+                <br />
+                <br />
+                <h4> <b> BRAKES </b> </h4> Master cylinder, ABS master cylinder, brake booster, wheel cylinders, disc brake caplipers, hydraulic lines and fittings.
+                <br />
+                <br />
+                <h4> <b> SEALS AND GASKETS </b> </h4> Cylinder head gaskets, all other seals and gaskets are covered in conjunction with repair of above-listed components
+                <br />
+                <br />
+                <h4> <b> COOLING </b> </h4> Radiator, fan clutch, cooling fan motor, and water pump
+                <br />
+                <br />
+                <h4> <b> AIR CONDITIONING </b> </h4> (Factory installed only) Compressor, clutch and coil assembly, evaporator, accumulator, condenser, evacuation and recharge in conjunction with the replacement of listed components.
+                <br />
+                <br />
+                <h4> <b> FUEL DELIVERY </b> </h4> Fuel pump, fuel sending unit, fuel tank, fuel injectors and metal fuel lines.
+                <br />
+                <br />
+                <h4> <b> ELECTRICAL </b> </h4> Battery, engine operation computer, voltage regulator, alternator, front/rear wiper motors, wiper module, window motors, window regulators, seat motors, ignition module, ignition coil, distributor, starter, starter solenoid and door lock actuators. Manually operated switches for above listed parts.
+                <br />
+                <br />
+                <h4> <b> 24-HOUR ROADSIDE ASSISTANCE </b> </h4> Towing, flat tire changing, fuel delivery, lock-out service, jump starting, and Safe and Secure Package.
+                <br />
+                <br />
+                <h4> <b> RENTAL CAR ALLOWANCE </b> </h4> Provided on all plans to get you back on the road quickly.
+                <br />
+                <br />
+              </div>
+            </div>
+            <br>
+            <div class="modal-footer">
+              <button class="btn btn-default" data-dismiss="modal">Close</button>
+              <button class="btn btn-primary " data-dismiss="modal" ng-click="emailWarrantyInterest(testUser)">
+                <!-- Confirm this Plan -->
+                I want this plan
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Warranties info: 2011 or Newer -->
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="modal fade" id="Factory-Type" tabindex="-1">
+        <div class="modal-dialog" style="width: 60%; min-width: 700px;">
+          <div class="modal-content">
+            <div class="modal-header centered-text">
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+              <h3> <b> <u> Factory Type Coverage </u> </b> </h3>
+              <br />
+              <div class="warrantyDescription">
+                <h4> <b> WHAT'S COVERED </b> </h4> Includes all items coverered under the car manufacturer's original coverage, <u> EXCEPT</u> for those items listed under "items not covered" on <u>Service Agreement</u>.
+                <br />
+                <br />
+                <h4> <b> BECAUSE WE COVER SO MANY PARTS - </b> </h4> We could not possibly list all the components. Instead we list the small number of things that are not covered. For example: oil, brake shoes, belts, hoses, tires, tune-up items, etc. Please read Service Agreement for complete details.
+                <br />
+                <br />
+                <h4> <b> WITH ALL OF OUR COVERAGES, YOU HAVE 24-HOUR EMERGENCY ROAD SERVICE! </b> </h4> Including towing, flat tire assistane, fuel delivery, jump-starting, lock-out and more for the entire length of the Agreement!
+                <br />
+                <br />
+                <h4> <b> RENTAL CAR ALLOWANCE </b> </h4> Provided on all plans to get you back on the road quickly.
+                <br />
+                <br />
+              </div>
+            </div>
+            <br>
+            <div class="modal-footer">
+              <button class="btn btn-default" data-dismiss="modal">Close</button>
+              <button class="btn btn-primary " data-dismiss="modal" ng-click="emailWarrantyInterest(testUser)">
+                <!-- Confirm this Plan -->
+                I want this plan
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Warranties: add admin view -->
+<div class="row">
+  <div class="col-xs-12">
+    <div class="modal fade" id="warrantyPlanAdmin">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Header -->
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h2 class="centered-text">Update Warranty Plan</h2>
+          </div>
+          <!-- Body -->
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="group">
+                  <select class="inputMODAL" name="warranty-type" ng-model="warranty.type_t">
+                    <option value="Any-Year">Drivetrain</option>
+                    <option value="Deluxe">Deluxe</option>
+                    <option value="Factory-Type">Factory</option>
+                  </select>
+                  <span class="bar"></span>
+                  <label>Type</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="group">
+                  <input id="warranty-months" class="inputMODAL" type="number" name="warranty-dur" ng-model="warranty.term.months">
+                  <span class="bar"></span>
+                  <label>Months</label>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="group">
+                  <input class="inputMODAL" type="number" name="warranty-miles" ng-model="warranty.term.miles">
+                  <span class="bar"></span>
+                  <label>Mileage</label>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="group">
+                  <input class="inputMODAL" placeholder="0.00" type="number" name="warranty-cost" ng-model="warranty.price">
+                  <span class="bar"></span>
+                  <label>Price</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Footer -->
+          <div class="modal-footer">
+            <button id="update-warranty" class="btn btn-primary" ng-click="warrantyUpdate()">Update Warranty</button>
+            <button id="update-warranty" class="btn btn-danger" ng-click="resetWarranty()">Reset Warranty</button>
+            <button class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Creating Modals for the Change Permissions Page -->
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="modal fade" id="superAdmin" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header centered-text">
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+              <span>
+                <h3>
+                  Are you sure you want to make 
+                  <br>
+                  <span ng-show="currentUser._id == this_user._id">
+                    <b style="color: red">YOURSELF</b>
+                  </span>
+                  <span ng-hide="currentUser._id == this_user._id">
+                    <i>{{currentUser.name}}</i>
+                  </span>
+                  <br>
+                  a Super Admin?
+                </h3>
+                <div class="divider"></div>
+              </span>
+            </div>
+            <div class="modal-footer">
+              <center>
+                <button class="btn btn-primary" data-dismiss="modal" ng-click="makeSuperAdmin(currentUser._id)">Yes</button>
+                <button class="btn btn-primary" data-dismiss="modal">No</button>
+              </center>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- regular admin -->
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="modal fade" id="Admin" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header centered-text">
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+              <span>
+                <h3>
+                  Are you sure you want to make 
+                  <br>
+                  <span ng-show="currentUser._id == this_user._id">
+                    <b style="color: red">YOURSELF</b>
+                  </span>
+                  <span ng-hide="currentUser._id == this_user._id">
+                    <i>{{currentUser.name}}</i>
+                  </span>
+                  <br>
+                  an Admin?
+                </h3>
+                <div class="divider"></div>
+              </span>
+            </div>
+            <div class="modal-footer">
+              <center>
+                <button class="btn btn-primary" data-dismiss="modal" ng-click="makeAdmin(currentUser._id)">Yes</button>
+                <button class="btn btn-primary" data-dismiss="modal">No</button>
+              </center>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- User -->
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="modal fade" id="regUser" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header centered-text">
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+              <span>
+              <h3>
+                Are you sure you want to make 
+                <br>
+                <span ng-show="currentUser._id == this_user._id">
+                  <b style="color: red">YOURSELF</b>
+                </span>
+                <span ng-hide="currentUser._id == this_user._id">
+                  <i>{{currentUser.name}}</i>
+                </span>
+                <br>
+                a Customer?
+              </h3>
+              <div class="divider"></div>
+            </span>
+            </div>
+            <div class="modal-footer">
+              <center>
+                <button class="btn btn-primary" data-dismiss="modal" ng-click="makeCustomer(currentUser._id)">Yes</button>
+                <button class="btn btn-primary" data-dismiss="modal">No</button>
+              </center>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="modal fade" id="delUser" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header centered-text">
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+              <span>
+                  <h3>
+                    Are you sure you want to 
+                    <span ng-show="currentUser._id == this_user._id">
+                      <br>
+                      <b style="color: red"> DELETE YOURSELF!?!?! </b>
+                    </span>
+                    <span ng-hide="currentUser._id == this_user._id">
+                      <b style="color: red">DELETE</b>
+                      <br>
+                      {{currentUser.name}}? 
+                    </span>
+                    <br>
+                    This action <b>CANNOT</b> be undone
+
+                  </h3>
+                  <div class="divider"></div>
+                </span>
+            </div>
+            <div class="modal-footer">
+              <center>
+                <button class="btn btn-primary" data-dismiss="modal" ng-click="removeUser(currentUser._id)">Yes</button>
+                <button class="btn btn-primary" data-dismiss="modal">No</button>
+              </center>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

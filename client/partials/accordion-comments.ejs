@@ -1,0 +1,90 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default chat">
+      <div class="panel-heading">
+        Comments
+      </div>
+      <div class="panel-body">
+        <ul ng-repeat="comment in loan.comments | orderBy:'time':reverse_comments"
+            class="{{comment.admin && !user.isAdmin ? 'hidden' : ''}}">
+          <li class="left clearfix" ng-hide="comment.admin && !user.isAdmin">
+            <div class="comment-writer">
+              <!-- For amins: names -->
+              <!-- For users: you vs 'Autowise' -->
+              <span ng-hide="isAdmin">
+                <strong ng-show="comment.writer.id != user._id">
+                  Autowise: 
+                </strong>
+                <strong ng-show="comment.writer.id == user._id">
+                  You: 
+                </strong>
+              </span>
+              <span ng-show="isAdmin">
+                <strong ng-show="comment.writer.id == user._id">
+                  You:
+                </strong>
+                <!-- {{comment}} -->
+                <strong ng-show="comment.writer.id != user._id">
+                  {{comment.writer.name}}
+                  <span ng-hide="comment.writer.name == 'System'">
+                    <span ng-show="comment.writer.name == loan.buyers_order.purchaser.name">
+                      (Purchaser)
+                    </span>
+                    <span ng-show="comment.writer.name == loan.buyers_order.copurchaser.name">
+                      (Copurchaser)
+                    </span>
+                  </span>
+                  :
+                </strong>
+              </span>
+            </div>
+
+            <div class="chat-body clearfix">
+              <!-- Comment Data -->
+              <span>{{comment.content}}</span>
+              <div class="pull-right">
+                <strong class="primary-font" ng-if="comment.admin">
+                    Admin Only
+                </strong>
+                <small class="text-muted">
+                  {{comment.newtime | date: "MMM dd, yyyy"}}
+                  <b>{{comment.newtime | date: "h:mm a"}}</b>
+                </small>
+                <!-- 'https://docs.angularjs.org/api/ng/filter/date' for future changes using angular -->
+                
+                <!-- Remove comment -->
+                <span ng-hide="((comment.writer.id != user._id) && !user.isSuperAdmin) 
+                               || comment.writer.name.toLowerCase() == 'system'
+                               || !user.isAdmin">
+                  <button class="btn btn-danger btn-xs" title="Delete this comment" ng-click="removeComment(loan._id, loan.comments, comment)">
+                    <em class="fa fa-trash"></em>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="panel-footer">
+        <!-- bug here: when a button is clicked, it submits the comment -->
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Type your message here..." id="{{loan._id}}-new-comment" />
+          <div class="input-group-btn">
+            <button class="btn btn-md btn-primary" ng-click="addComment(loan._id)">
+              <!-- Other words: -->
+              <!-- Attach, plain comment? -->
+              <span class="btn-group-text">Save Comment</span>
+              <span class="btn-group-icon"><em class="fa fa-xl fa-send"></em></span>
+            </button>
+            <button class="btn btn-md" ng-show="user.isAdmin" ng-class="(loan.commentAsAdmin ? 'btn-dark' : 'btn-info')" ng-click="loan.commentAsAdmin = !loan.commentAsAdmin">
+              <span class="btn-group-text" ng-if="loan.commentAsAdmin">NOT</span>
+              <span class="btn-group-text">Visible To Customer</span>
+              <span class="btn-group-icon" ng-if="loan.commentAsAdmin"><em class="fa fa-xl fa-eye-slash"></em></span>
+              <span class="btn-group-icon" ng-if="!loan.commentAsAdmin"><em class="fa fa-xl fa-eye"></em></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

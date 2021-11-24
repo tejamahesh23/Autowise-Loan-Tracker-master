@@ -1,0 +1,36 @@
+<div>
+  <h4 class="centered-text">Actions</h4>
+  <div class="col-md-12 actions-row">
+    <button id="action-status" class="btn btn-primary btn-md" 
+       data-target="#changeModal" data-toggle="modal"
+       title="Change status of loan" ng-click="prepareLoanEdit(loan)">
+      <span class="btn-group-text"> Change Status </span>
+        <span class="btn-group-icon">Status</span>
+    </button>
+
+    <button id="action-edit" class="btn btn-info btn-md" 
+       data-target="#buyersOrderModal" data-toggle="modal"
+       title="Edit or view Buyer's Order" ng-click="prepareLoanEdit(loan)">
+      <span class="btn-group-text"> Buyer's Order </span>
+        <span class="btn-group-icon">
+        BO
+        </span>
+    </button>
+    
+    <button id="action-warranty" class="btn btn-cadet btn-md" 
+       data-target="#warrantyPlanAdmin" data-toggle="modal"
+       title="Add a warranty plan" ng-click="prepareLoanEdit(loan)">
+      <span class="btn-group-text"> Change Warranty </span>
+        <span class="btn-group-icon">
+        Warr.
+        </span>
+    </button>
+
+    <button id="action-email" class="btn btn-warning btn-md" 
+     ng-click="emailClient(loan._id, loan.buyers_order.purchaser.email, loan.buyers_order.purchaser.name, 
+                           loan.buyers_order.copurchaser.email, loan.buyers_order.copurchaser.name)">
+      <span class="btn-group-text">Email Customer(s)</span>
+      <span class="btn-group-icon"><em class="fa fa-xl fa-envelope"></em></span>
+    </button>
+  </div>  
+</div>

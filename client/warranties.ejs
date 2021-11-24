@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include partials/header.ejs %>
+</head>
+
+<body>
+  <div class="col-sm-12 col-lg-12 main" ng-app="SWEApp" ng-controller="Warranties" ng-init="init()">
+    <% include partials/nav.ejs %>
+
+    <!-- ROW - WARRANTIES QUERY FORM -->
+    <div class="row warranties">
+      <div class="col-md-12">
+        <div class="page-header centered-text">
+          <h1> Warranties</h1>
+          <h5> Enter car information. Qualified warranties will be displayed below </h5>
+        </div>
+
+        <!-- 'FORM' FOR WARRANTY PLAN QUERY -->
+        <div class="row modal-body">
+          <div class="group selector col-md-4">
+
+            <input class="inputMODAL" type="text" required
+            ng-model="query.age_text" 
+            ng-focus="onFocusInputWarr('0')" 
+            ng-blur="onBlurInputWarr('0')">
+
+            <span class="bar"></span>
+            <label>Car Year</label>
+            <div class="sudo-select">
+              <ul  id="sudo-select-warr-0">
+                <li class="category-option" ng-mousedown="setWarrantiesYear('-1')">
+                  Any year
+                </li>
+                <li class="category-option" ng-mousedown="setWarrantiesYear('2007')">
+                  2007 or newer
+                </li>
+                <li class="category-option" ng-mousedown="setWarrantiesYear('2011')">
+                  2011 or newer
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- TEXT-ENTRY FOR CAR MILEAGE -->
+          <div class="group col-md-4">
+            <input class="inputMODAL" type="number" name="Mileage" required
+            ng-model="query.mileage" 
+            ng-change="queryWarrantyPlan()">
+
+            <span class="bar"></span>
+            <label>Mileage</label>
+          </div>
+
+          <div class="group selector col-md-4">
+            <input class="inputMODAL" type="text" required
+            ng-model="query.make" 
+            ng-focus="onFocusInputWarr('1')" 
+            ng-blur="onBlurInputWarr('1')">
+
+            <span class="bar"></span>
+            <label>Car Make Region</label>
+            <div class="sudo-select">
+              <ul class="category-options" id="sudo-select-warr-1">
+                <li class="category-option" data-value="Domestic" ng-mousedown="setWarrantiesMake('Domestic')">
+                  Domestic
+                </li>
+                <li class="category-option" data-value="Foreign" ng-mousedown="setWarrantiesMake('Foreign')">
+                  Foreign
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ROW - WARRANTIES QUERY RESULTS -->
+    <div class="row">
+      <div class="panel-heading centered-text">
+          <span style="font-size: 30px">Available Plans:</span>
+      </div>
+      <div class="col-md-12">
+        <div class="container-accordion" style="padding: 0px">
+          <div class="accordion invisible {{visible}}">
+            <dl>
+              <div ng-repeat="warranty in matchedWarranties | orderBy: ['term.months' , 'term.miles']">
+                <dt data-target="#{{warranty.type}}" data-toggle="modal" ng-click="setChosenWarranty(warranty)">
+                  <a class="accordionFakeTitle warrantiesQueryText">
+                    <div class="pull-right right-right">
+                      <h4>Duration: <strong> {{warranty.term.months}} months </strong> </h4>
+                      <h4>Mileage: <strong> {{warranty.term.miles * 1000 | number }} miles </strong> </h4>
+                    </div>
+                    <div class="pull-left left-left" title="Starting price">
+                      <h2>
+                        <strong> {{warranty.price | currency}}</strong><span>*</span>
+                        <!-- starting -->
+                      </h2>
+                    </div>
+                  </a>
+                </dt>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Warranty Modal -->
+    <% include partials/modals.ejs %>
+  </div>
+  <!-- JAVASCRIPT FILES -->
+  <% include partials/footer.ejs %>
+</body>
+
+</html>

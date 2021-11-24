@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include partials/header.ejs %>
+</head>
+
+<body>
+  <div class="col-sm-offset-1 col-sm-10 col-sm-offset-1 col-lg-offset-1 col-lg-10 col-lg-offset-1"
+    ng-app="SWEApp" ng-controller="Permissions" ng-init="init()">
+    <% include partials/nav.ejs %>
+
+    <div id="permissionsTable">
+      <div class="centered-text">
+        <h1>User Permissions</h1>
+      </div>
+      
+      <br>
+      <input class="sb-search-input" placeholder="Search for a customer or employee" ng-model="query" type="text">
+      <br>
+      <br>
+
+      <div ng-show="loading" id="loading">
+        <img id="loader" ng-show="loading" src="<%- path -%>/resources/load.gif">
+        <div class="load-txt">Loading</div>
+      </div>
+
+      <div class="centered-text users-header invisible {{visible}}" ng-show="!loading && filtered_users.length > 0">
+        <span class="m-col-2">
+          Name
+          <a href="#">
+          <em class="fa fa-info-circle"
+              ng-mouseenter="InfoTip=true"
+              ng-mouseleave="InfoTip=false"></em>
+          </a>
+        </span>
+        <span class="m-col-2">DOB</span>
+        <span class="m-col-3">Option #1</span>
+        <span class="m-col-3">Option #2</span>
+        <span class="m-col-1" style="left: -7px">Delete</span>
+      </div>
+
+      <div class="users-table invisible {{visible}}" ng-hide="loading" >
+        <div ng-repeat="user in filtered_users = (users | filter: query | orderBy: 'updated_at')"
+             class="centered-text cleafix" style="clear: both">
+
+          <span class="btn m-col-2 {{user.isAdmin ? 'isAdmin' : ''}} {{user.isSuperAdmin ? 'isSuperAdmin' : ''}}">
+            {{user.name | limitTo: 15}}
+          </span>
+
+          <span class="btn m-col-2"> {{user.dob}} </span>
+          <span class="m-col-3" ng-show="user.isAdmin">
+            <button class="btn btn-md" data-target="#regUser" data-toggle="modal"
+                    ng-click="assignCurrentUser(user)" title="Make user a Customer">
+               Customer
+            </button>
+          </span>
+          <span class="m-col-3" ng-show="user.isSuperAdmin || !user.isAdmin">
+            <button class="btn btn-info btn-md" data-target="#Admin" data-toggle="modal"
+                    ng-click="assignCurrentUser(user)" title="Make user a Admin">
+               Admin
+            </button>
+          </span>
+          <span class="m-col-3" ng-hide="user.isSuperAdmin">
+            <button class="btn btn-warning btn-md" data-target="#superAdmin" data-toggle="modal"
+                    ng-click="assignCurrentUser(user)" title="Make user a Super Admin">
+               Super Admin
+            </button>
+          </span>
+          <span class="m-col-1">
+            <button class="btn btn-danger btn-md" data-target="#delUser" data-toggle="modal"
+                    ng-click="assignCurrentUser(user)">
+               <em class="fa fa-trash"></em>
+            </button>
+          </span>
+          <span></span>
+        </div>
+        <h3 style="background: #f1f4f7;" ng-hide="filtered_users.length > 0" class="centered-text">
+          No results. Either change the filters or log in again
+        </h3>
+      </div>
+
+    </div>
+
+    <!-- diff lines for description -->
+    <div class="invisible {{visible}}">
+      <div class="label-container fadeTip label-text InfoTip" ng-show="InfoTip">
+        Customers:
+        <br> &nbsp;&nbsp;&nbsp; Can make comments, request warranties, and delete their own comments
+        <br> <b>Admins</b> :
+        <br> &nbsp;&nbsp;&nbsp; Can create/update loans and make comments as 'admin only'
+        <br> <b class="isSuperAdmin">Super Admins</b>:
+        <br> &nbsp;&nbsp;&nbsp; Can change users permissions, delete users, delete loans, and anyone's comments
+      </div>
+    </div>
+
+  <% include partials/modals.ejs %>
+  </div>
+  <% include partials/footer.ejs %>
+</body>
+
+</html>

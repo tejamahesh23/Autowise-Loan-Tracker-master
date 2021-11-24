@@ -1,0 +1,44 @@
+<!--  Tool Tips  -->
+<div class="invisible {{visible}}">
+  <div class="label-container fadeTip label-text AddTip" ng-show="AddTip">
+      Add New Loan
+  </div>
+  <div class="label-container fadeTip label-text DelTip" ng-show="DelTip">
+      Delete Selected Loans
+  </div>
+  <div class="label-container fadeTip label-text ArcTip" ng-show="ArcTip">
+      Archive Selected Loans
+  </div>
+  <div class="label-container fadeTip label-text StatTip" ng-show="StatTip">
+      Change Selected Loans' Status
+  </div>
+</div>
+  
+
+<!-- Buttons -->
+<a class="float-btn" id="menu-share" ng-click="prepareLoanCreate()" data-target="#buyersOrderModal" data-toggle="modal" 
+   ng-mouseenter="AddTip=true" ng-mouseleave="AddTip=false">
+    <em class="fa fa-plus float-child"></em>
+</a>
+<ul id="float-list" ng-show="massLoans.length > 0">
+    <li ng-show="user.isSuperAdmin" ng-click="removeEnMass()"
+        ng-mouseenter="DelTip=true" ng-mouseleave="DelTip=false">
+      <a id="float-trash">
+        <em class="fa fa-trash float-child"></em>
+      </a>
+    </li>
+
+    <li ng-click="archiveEnMass()"
+        ng-mouseenter="ArcTip=true" ng-mouseleave="ArcTip=false">
+      <a id="float-archive">
+        <em class="fa fa-archive float-child"></em>
+      </a>
+    </li>
+
+    <li data-target="#changeModalEnMasse" data-toggle="modal" 
+        ng-mouseenter="StatTip=true" ng-mouseleave="StatTip=false">
+      <a id="float-edit">
+        <em class="fa fa-edit float-child"></em>
+      </a>
+    </li>
+</ul>
